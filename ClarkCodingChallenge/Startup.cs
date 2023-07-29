@@ -27,8 +27,10 @@ namespace ClarkCodingChallenge
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            services.AddSingleton<DataAccess.IContactsRepository, DataAccess.InMemoryContactsRepository>();
+            services.AddSingleton<BusinessLogic.IContactsService, BusinessLogic.ContactsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,7 +42,7 @@ namespace ClarkCodingChallenge
             }
             else
             {
-                app.UseExceptionHandler("/Contacts/Error");
+                app.UseExceptionHandler("/Contact/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -57,7 +59,7 @@ namespace ClarkCodingChallenge
                 routes.MapRazorPages();
                 routes.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Contacts}/{action=Index}/{id?}");
+                    pattern: "{controller=Contact}/{action=Index}/{id?}");
             });
         }
     }

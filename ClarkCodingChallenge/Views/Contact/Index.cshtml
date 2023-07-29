@@ -1,0 +1,46 @@
+﻿@model ContactModel;
+
+@{
+    ViewData["Title"] = "Contacts Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <!--
+
+    Provide a simple html page in which a user can enter the following. The page merely needs to be functional and does not need to be styled in any way.
+    * Last Name
+    * First Name
+    * Email
+
+    -->
+    @using (Html.BeginForm("Index", "Contact", FormMethod.Post))
+    {
+        <div>
+            <label asp-for="FirstName">First Name:</label>
+            <input asp-for="FirstName" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="LastName">Last Name:</label>
+            <input asp-for="LastName" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="EmailAddress">Email Address:</label>
+            <input asp-for="EmailAddress" />
+            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+        </div>
+
+        <button type="submit">Add Contact</button>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function (event) {
+                document.getElementById("FirstName").focus();
+            });
+        </script>
+    }
+</div>
